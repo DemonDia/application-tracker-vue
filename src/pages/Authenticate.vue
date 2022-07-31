@@ -1,6 +1,9 @@
 <template>
-  <el-card v-if="mode == 'login'" class="box-card" style="width: 250px;
-    margin: 10px auto;">
+  <el-card
+    v-if="mode == 'login'"
+    class="box-card"
+    style="width: 250px; margin: 10px auto"
+  >
     <template #header>
       <div class="card-header">
         <h3>Login</h3>
@@ -24,9 +27,7 @@
       <a @click="toggleLoginAndRegister">here</a>
     </div>
   </el-card>
-
-  <el-card v-else class="box-card" style="width: 250px;
-    margin: 10px auto;">
+  <el-card v-else class="box-card" style="width: 250px; margin: 10px auto">
     <template #header>
       <div class="card-header">
         <h3>Register</h3>
@@ -62,6 +63,28 @@
       >
     </div>
   </el-card>
+
+  <el-alert
+    title="Login failed"
+    v-if="this.haveError == true && mode == 'login'"
+    type="error alert"
+  />
+  <el-alert
+    title="Registration failed"
+    v-if="this.haveError == true && mode == 'register'"
+    type="error alert"
+  />
+
+  <el-alert
+    title="Successfully logged in"
+    v-if="this.success == true && mode == 'login'"
+    type="success alert"
+  />
+  <el-alert
+    title="Successfully registered"
+    v-if="this.success == true && mode == 'register'"
+    type="success alert"
+  />
 </template>
 <script>
 import {
@@ -81,6 +104,8 @@ export default {
       name: "",
       mode: "login",
       errorMessages: [],
+      haveError: false,
+      success: false,
     };
   },
   methods: {
@@ -103,11 +128,11 @@ export default {
       } else if (this.password !== this.confirmPassword) {
         this.errorMessages.push("Passwords do not match");
       }
-      console.log(this.errorMessages);
 
       if (this.errorMessages.length > 0) {
-        alert(this.errorMessages);
         this.errorMessages = [];
+        this.success = false;
+        this.haveError = true;
       } else {
         // create new user
         this.registerHelper();
@@ -121,14 +146,17 @@ export default {
       createUserWithEmailAndPassword(auth, this.email, this.password)
         .then(async (userCredential) => {
           // Signed in
-          console.log(userCredential.user);
           this.updateUserProfile();
+          this.success = true;
+          this.haveError = false;
           alert("Success");
           window.location.href = "/";
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
+          this.success = false;
+          this.haveError = true;
           console.log(errorCode);
           console.log(errorMessage);
           // ..
@@ -142,8 +170,8 @@ export default {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log(user.displayName);
-          alert("Success");
+          this.success = true;
+          this.haveError = false;
           window.location.href = "/home";
           // ...
         })
@@ -152,7 +180,8 @@ export default {
           const errorMessage = error.message;
           console.log(errorCode);
           console.log(errorMessage);
-          alert("Login failed");
+          this.success = false;
+          this.haveError = true;
         });
     },
 
@@ -169,7 +198,7 @@ export default {
         })
         .catch((error) => {
           // An error occurred
-          console.log(error());
+          console.log(error);
           // ...
         });
     },
@@ -180,6 +209,8 @@ export default {
       this.email = "";
       this.password = "";
       this.confirmPassword = "";
+      this.success = false;
+      this.haveError = false;
     },
 
     // toggle
@@ -209,14 +240,14 @@ export default {
 };
 </script>
 <style scoped>
-span{
+span {
   display: flex;
-  margin:5px;
+  margin: 5px;
 }
-h3{
-  margin:5px;
+h3 {
+  margin: 5px;
 }
-.el-input{
-  margin:5px;
+.el-input {
+  margin: 5px;
 }
 </style>

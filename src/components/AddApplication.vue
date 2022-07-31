@@ -87,7 +87,6 @@ export default {
       if (this.application_date == null) {
         this.errors.push("Please add an application date");
       }
-      console.log(this.errors.length);
       if (this.errors.length == 0) {
         var formattedAppliedDate = this.application_date.toLocaleString();
         var formattedLastUpdated = new Date().toLocaleString();

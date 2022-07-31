@@ -2,10 +2,7 @@
   <div v-if="this.currentUser != null">
     <h1>Welcome, {{ this.currentUser.displayName }}</h1>
     <AddApplication :user_id="this.currentUser.uid" />
-    <ApplicationTable
-      :applications="applications"
-      :user="this.currentUser"
-    />
+    <ApplicationTable :applications="applications" :user="this.currentUser" />
   </div>
 </template>
 <script>
@@ -21,7 +18,6 @@ export default {
     AddApplication,
   },
   methods: {
-
     // =========================helpers=========================
     // get current user
     getCurrentUser: function () {
@@ -51,6 +47,7 @@ export default {
   },
   onMounted() {
     this.getApplicationRealTimeUpadtes();
+
   },
 
   beforeMount() {
