@@ -144,7 +144,7 @@ export default {
     registerHelper: function () {
       const auth = getAuth();
       createUserWithEmailAndPassword(auth, this.email, this.password)
-        .then(async (userCredential) => {
+        .then(async () => {
           // Signed in
           this.updateUserProfile();
           this.success = true;
@@ -166,9 +166,8 @@ export default {
     loginHelper: function () {
       const auth = getAuth();
       signInWithEmailAndPassword(auth, this.email, this.password)
-        .then((userCredential) => {
+        .then(() => {
           // Signed in
-          const user = userCredential.user;
           this.success = true;
           this.haveError = false;
           window.location.href = "/home";

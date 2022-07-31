@@ -7,12 +7,12 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "api_key",
-  authDomain: "auth_Domain",
-  projectId: "project_Id",
-  storageBucket: "storage_Bucket",
-  messagingSenderId: "messagingSenderId",
-  appId: "appId",
+  apiKey: "AIzaSyDb0taCgxnu7QHj1o89odZRVLl9x-p6Y5c",
+  authDomain: "application-tracker-vue.firebaseapp.com",
+  projectId: "application-tracker-vue",
+  storageBucket: "application-tracker-vue.appspot.com",
+  messagingSenderId: "194872733556",
+  appId: "1:194872733556:web:fdac3ee09017c5d92c4621",
 };
 
 // Initialize Firebase

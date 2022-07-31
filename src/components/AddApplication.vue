@@ -46,7 +46,7 @@
     v-if="this.haveError == true"
     type="error alert"
   />
-    <el-alert
+  <el-alert
     title="Application successfully added"
     v-if="this.success == true"
     type="success alert"
@@ -107,6 +107,7 @@ export default {
       } else {
         this.haveError = true;
         this.success = false;
+        this.errors = [];
       }
     },
     // ===============helper===============
@@ -121,7 +122,8 @@ export default {
 
     addApplicationToDb: async function () {
       await await addDoc(collection(db, "applications"), this.application);
-      alert("Added!");
+      this.success = true;
+      this.haveError = false;
       this.clear();
     },
   },

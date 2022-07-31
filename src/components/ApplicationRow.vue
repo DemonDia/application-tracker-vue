@@ -72,7 +72,7 @@ export default {
         this.errors.push("Please select a role type");
       }
       if (this.errors.length > 0) {
-        alert(this.errors);
+        console.log("errors")
       } else {
         var formattedUpdatedDate = new Date().toLocaleString();
         this.updatedApplication = {
