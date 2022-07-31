@@ -149,7 +149,6 @@ export default {
           this.updateUserProfile();
           this.success = true;
           this.haveError = false;
-          alert("Success");
           window.location.href = "/";
         })
         .catch((error) => {
