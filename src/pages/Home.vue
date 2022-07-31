@@ -4,7 +4,7 @@
     <AddApplication :user_id="this.currentUser.uid" />
     <ApplicationTable
       :applications="applications"
-      :user_id="this.currentUser.uid"
+      :user="this.currentUser"
     />
   </div>
 </template>

@@ -60,7 +60,7 @@ export default {
       searchEntry: "",
     };
   },
-  props: ["applications", "user_id"],
+  props: ["applications", "user"],
   components: { ApplicationRow },
   methods: {
     // export
@@ -69,7 +69,7 @@ export default {
       this.exportApplications = this.applications.map((application) => {
         delete application.id;
         delete application.user_id;
-        console.log(application);
+        // console.log(application);
         application = JSON.parse(
           JSON.stringify(application, [
             "company_name",
@@ -91,8 +91,12 @@ export default {
       // export to pdf
       var workbook = XLSX.utils.book_new();
       var worksheet = XLSX.utils.json_to_sheet(this.exportApplications);
-      XLSX.utils.book_append_sheet(workbook, worksheet, this.user_id);
-      XLSX.writeFile(workbook, this.user_id + ".xlsx");
+      var fileDate = new Date().toLocaleString();
+      console.log(this.user);
+      var file_name = this.user.displayName.replace(" ", "_") + "_" + fileDate;
+      file_name = file_name.replace(",","_")
+      XLSX.utils.book_append_sheet(workbook, worksheet, "Appplcations");
+      XLSX.writeFile(workbook, file_name + ".xlsx");
     },
   },
   computed: {
@@ -120,7 +124,7 @@ export default {
 .el-button {
   margin: 5px;
 }
-table{
-  margin:10px auto;
+table {
+  margin: 10px auto;
 }
 </style>
